@@ -11,9 +11,9 @@ Libtest(){
 	echo "$LIB_PING $LIB" >> ping.pl
 	libAddr=`sort -V ping.pl|sed -n '1p'|awk '{print $2}'`
 	if [ "$libAddr" == "$GIT" ];then
-		libAddr='https://raw.githubusercontent.com/lizhongnian/ss-panel-v3-mod-node-connect/master/libsodium-1.0.13.tar.gz'
+		libAddr='https://github.com/amwamw968/ss-panel-v3-mod-node-connect/raw/master/libsodium-1.0.18.tar.gz'
 	else
-		libAddr='https://download.libsodium.org/libsodium/releases/libsodium-1.0.13.tar.gz'
+		libAddr='https://github.com/jedisct1/libsodium/releases/download/1.0.18-RELEASE/libsodium-1.0.18.tar.gz'
 	fi
 	rm -f ping.pl		
 }
@@ -94,11 +94,11 @@ install_centos_ssr(){
 	pip install --upgrade pip
 	Libtest
 	wget --no-check-certificate $libAddr
-	tar xf libsodium-1.0.13.tar.gz && cd libsodium-1.0.13
+	tar xf libsodium-1.0.18.tar.gz && cd libsodium-1.0.18
 	./configure && make -j2 && make install
 	echo /usr/local/lib > /etc/ld.so.conf.d/usr_local_lib.conf
 	ldconfig
-	git clone -b manyuser https://github.com/lizhongnian/shadowsocks.git "/root/shadowsocks"
+	git clone -b manyuser https://github.com/amwamw968/shadowsocks.git "/root/shadowsocks"
 	cd /root/shadowsocks
 	chkconfig supervisord on
 	#第一次安装
@@ -111,7 +111,7 @@ install_centos_ssr(){
 	#第三次检测是否成功
 	if [ -z "`python -c 'import requests;print(requests)'`" ]; then
 		mkdir python && cd python
-		git clone https://github.com/lizhongnian/urllib3.git && cd urllib3
+		git clone https://github.com/amwamw968/urllib3.git && cd urllib3
 		python setup.py install && cd ..
 		git clone https://github.com/nakagami/CyMySQL.git && cd CyMySQL
 		python setup.py install && cd ..
@@ -138,14 +138,14 @@ install_ubuntu_ssr(){
 	apt-get install iptables git -y
 	Libtest
 	wget --no-check-certificate $libAddr
-	tar xf libsodium-1.0.13.tar.gz && cd libsodium-1.0.13
+	tar xf libsodium-1.0.18.tar.gz && cd libsodium-1.0.18
 	./configure && make -j2 && make install
 	echo /usr/local/lib > /etc/ld.so.conf.d/usr_local_lib.conf
 	ldconfig
 	apt-get install python-pip git -y
 	pip install cymysql
 	cd /root
-	git clone -b master https://github.com/lizhongnian/shadowsocks.git "/root/shadowsocks"
+	git clone -b master https://github.com/amwamw968/shadowsocks.git "/root/shadowsocks"
 	cd shadowsocks
 	pip install -r requirements.txt
 	chmod +x *.sh
@@ -157,10 +157,8 @@ install_node(){
 	clear
 	echo
 	echo "#########################################################################"
-	echo "# One click Install Shadowsocks-Python-Manyuser                         "
-	echo "# Github: https://github.com/lizhongnian/ss-panel-v3-mod-node-connect   "
-	echo "# Author: 7colorblog                                                    "
-	echo "# blog: https://www.7colorblog.com                                      "	
+	echo "# One click Install Shadowsocks-Python-Manyuser                          "
+	echo "# Github: https://github.com/amwamw968/ss-panel-v3-mod-node-connect      "
 	echo "#########################################################################"
 	echo
 	#Check Root
@@ -210,7 +208,7 @@ install_node(){
 	# 启用supervisord
 	supervisorctl shutdown
 	#某些机器没有echo_supervisord_conf 
-	wget -N -P  /etc/ --no-check-certificate  https://raw.githubusercontent.com/lizhongnian/ss-panel-v3-mod-node-connect/master/supervisord.conf
+	wget -N -P  /etc/ --no-check-certificate  https://raw.githubusercontent.com/amwamw968/ss-panel-v3-mod-node-connect/master/supervisord.conf
 	supervisord
 	#iptables
 	iptables -F
@@ -224,7 +222,7 @@ install_node(){
 	chmod +x /etc/rc.d/rc.local
 	echo "#########################################################################"
 	echo "# 安装完成，节点即将重启使配置生效                                      "
-	echo "# Github: https://github.com/lizhongnian/ss-panel-v3-mod-node-connect   "
+	echo "# Github: https://github.com/amwamw968/ss-panel-v3-mod-node-connect   "
 	echo "# Author: 7colorblog                                                    "
 	echo "# blog: https://www.7colorblog.com                                      "	
 	echo "#########################################################################"
@@ -235,7 +233,7 @@ install_node_db(){
 	echo
 	echo "#########################################################################"
 	echo "# One click Install Shadowsocks-Python-Manyuser                         "
-	echo "# Github: https://github.com/lizhongnian/ss-panel-v3-mod-node-connect   "
+	echo "# Github: https://github.com/amwamw968/ss-panel-v3-mod-node-connect   "
 	echo "# Author: 7colorblog                                                    "
 	echo "# blog: https://www.7colorblog.com                                      "	
 	echo "#########################################################################"
@@ -294,7 +292,7 @@ install_node_db(){
 	# 启用supervisord
 	supervisorctl shutdown
 	#某些机器没有echo_supervisord_conf 
-	wget -N -P  /etc/ --no-check-certificate  https://raw.githubusercontent.com/lizhongnian/ss-panel-v3-mod-node-connect/master/supervisord.conf
+	wget -N -P  /etc/ --no-check-certificate  https://raw.githubusercontent.com/amwamw968/ss-panel-v3-mod-node-connect/master/supervisord.conf
 	supervisord
 	#iptables
 	iptables -F
@@ -308,7 +306,7 @@ install_node_db(){
 	chmod +x /etc/rc.d/rc.local
 	echo "#########################################################################"
 	echo "# 安装完成，节点即将重启使配置生效                                      "
-	echo "# Github: https://github.com/lizhongnian/ss-panel-v3-mod-node-connect   "
+	echo "# Github: https://github.com/amwamw968/ss-panel-v3-mod-node-connect   "
 	echo "# Author: 7colorblog                                                    "
 	echo "# blog: https://www.7colorblog.com                                      "
 	echo "#########################################################################"
@@ -317,7 +315,7 @@ install_node_db(){
 echo
 echo "########################################################################"
 echo "# ss-panel-v3-mod后端对接一键脚本                     				 "
-echo "# Github: https://github.com/lizhongnian/ss-panel-v3-mod-node-connect  "
+echo "# Github: https://github.com/amwamw968/ss-panel-v3-mod-node-connect  "
 echo "# Author: 7colorblog                                                   "
 echo "# blog: https://www.7colorblog.com                                     "
 echo "# 请输入1或2选择对接方式                                               "
